@@ -58,12 +58,7 @@
           echo $error.'<br/>';
         }
       echo'</div>';
-      } else{
-      echo '<div class = "bg-danger">';
-          echo 'compte enregistré avec succès';
-      echo'</div>';
-
-    }
+      } 
 
         ?>
         <form method="post">
@@ -86,7 +81,7 @@
 
             <div class = "form-group">
             <label class = "control-label" for = "datenaissance"> date de naissance (jj/mm/aa): </label>
-            <input type = "text" class = "form-control" id = "datenaissance" name="datenaissance" required="required"/> 
+            <input type = "date" class = "form-control" id = "datenaissance" name="datenaissance" required="required"/> 
 
             <div class = "form-group">
             <label class = "control-label" for = "promotion"> promotion : </label>

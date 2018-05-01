@@ -42,6 +42,24 @@ if(is_already_in_use('pseudo', $pseudo, 'users')){
 			echo '<div class = "col-sm-4" style="background-color:lavender">';
           echo "compte cree avec succes !";
           echo "</div>";
+
+
+          $q = $db->prepare('INSERT INTO compte(pseudo,nom,prenom,email,datenaissance,promotion,situationpro,mdp) VALUES(:pseudo,:nom,:prenom,:email,:datenaissance,:promotion,:situationpro,:mdp)');
+
+          $q->execute([
+          	'pseudo' => $pseudo,
+          	'nom' => $nom,
+          	'prenom' => $prenom,
+          	'email' => $email,
+          	'datenaissance' => $datenaissance,
+          	'promotion' => $promotion,
+          	'situationpro' => $situationpro,
+          	'mdp' => $mdp
+          ]);
+
+
+
+
 		}
 
 		} else {
