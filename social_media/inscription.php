@@ -4,6 +4,10 @@
 require("D:/wamp64/www/social_media/config/database.php");
 require("D:/wamp64/www/social_media/includes/functions.php");
 
+$base = mysqli_connect ('localhost', 'root', '');  
+    mysqli_select_db ($base,"socialmedia") ;
+
+
 	if(isset($_POST["register"])){
 
 		if(!empty($_POST["pseudo"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["datenaissance"]) && !empty($_POST["promotion"]) && !empty($_POST["situationpro"]) && !empty($_POST["mdp"]) && !empty($_POST["confirmer_mdp"])){
@@ -39,28 +43,28 @@ if(is_already_in_use('pseudo', $pseudo, 'users')){
 
 		if(count($errors) == 0){
 			//enregistrement de l'utilisateur 
-			echo '<div class = "col-sm-4" style="background-color:lavender">';
-          echo "compte cree avec succes !";
-          echo "</div>";
+		 
+			//connectMaBase();
+
+          //$q = $db->prepare('INSERT INTO compte(pseudo,nom,prenom,email,datenaissance,promotion,situationpro,mdp) VALUES(:pseudo,:nom,:prenom,:email,:datenaissance,:promotion,:situationpro,:mdp)');
+
+          //$q->execute(array(
+          //	'pseudo' => $pseudo,
+          //	'nom' => $nom,
+//'prenom' => $prenom,
+          //	'email' => $email,
+          //	'datenaissance' => $datenaissance,
+          //	'promotion' => $promotion,
+          //	'situationpro' => $situationpro,
+          //	'mdp' => $mdp
+         // ));
+         
+			$sql = "INSERT INTO compte(pseudo,nom,prenom,email,datenaissance,promotion,situationpro,mdp) VALUES('$pseudo','$nom','$prenom','$email','$datenaissance','$promotion','$situationpro','$mdp')";
+			mysqli_query($base,$sql) or die('erreur SQL !'.$sql.'<br/>'.mysqli_error($base));
+			mysqli_close($base);
 
 
-          $q = $db->prepare('INSERT INTO compte(pseudo,nom,prenom,email,datenaissance,promotion,situationpro,mdp) VALUES(:pseudo,:nom,:prenom,:email,:datenaissance,:promotion,:situationpro,:mdp)');
-
-          $q->execute([
-          	'pseudo' => $pseudo,
-          	'nom' => $nom,
-          	'prenom' => $prenom,
-          	'email' => $email,
-          	'datenaissance' => $datenaissance,
-          	'promotion' => $promotion,
-          	'situationpro' => $situationpro,
-          	'mdp' => $mdp
-          ]);
-
-
-
-
-		}
+          		}
 
 		} else {
 

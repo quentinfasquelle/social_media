@@ -38,9 +38,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Accueil</a></li>
-            <li><a href="connexion.php">connexion</a></li>
-            <li><a href="inscription.php">inscription</a></li>
+            <li><a href="index.php">Accueil</a></li>
+            <li class="active"><a href="connexion.php">Connexion</a></li>
+            <li><a href="inscription.php">Inscription</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -48,61 +48,34 @@
 
     <div id ="main-content">
       <div class="jumbotron"> 
-        <h1>L'inscription c'est par ici !</h1>
+        <h1>La connexion c'est par ici !</h1>
 
         <?php
         if(isset($errors) && count($errors) != 0){
-
         echo '<div class = "bg-danger">';
           foreach($errors as $error){
           echo $error.'<br/>';
         }
       echo'</div>';
       } 
-
         ?>
         <form method="post">
 
           <div class = "form-group">
             <label class = "control-label" for = "pseudo"> Pseudo: </label>
-            <input type = "text" value="<?php if(isset($_GET['nom'])) { echo htmlentities($_GET['nom']);}?>" class = "form-control" id = "pseudo" name="pseudo" required="required"/>
+            <input type = "text" class = "form-control" id = "pseudo" name="pseudo" required="required"/>
 
-          <div class = "form-group">
-            <label class = "control-label" for = "nom"> Nom: </label>
-            <input type = "text" class = "form-control" id = "nom" name="nom" required="required"/>
-
-            <div class = "form-group">
-            <label class = "control-label" for = "prenom"> Prenom: </label>
-            <input type = "text" class = "form-control" id = "prenom" name="prenom" required="required"/> 
-
+   
             <div class = "form-group">
             <label class = "control-label" for = "email"> Adresse Email: </label>
             <input type = "email" class = "form-control" id = "email" name="email" required="required"/> 
-
-            <div class = "form-group">
-            <label class = "control-label" for = "datenaissance"> date de naissance (jj/mm/aa): </label>
-            <input type = "text" class = "form-control" id = "datenaissance" name="datenaissance" required="required"/> 
-
-            <div class = "form-group">
-            <label class = "control-label" for = "promotion"> promotion : </label>
-            <input type = "text" class = "form-control" id = "promotion" name="promotion" required="required"/>
-
-
-            <div class = "form-group">
-            <label class = "control-label" for = "situationpro"> situation professionelle: </label>
-            <input type = "text" class = "form-control" id = "situationpro" name="situationpro" required="required"/>  
-
             
 
             <div class = "form-group">
             <label class = "control-label" for = "mdp"> mot de passe : </label>
-            <input type = "text" class = "form-control" id = "mdp" name="mdp" required="required"/> 
+            <input type = "text" class = "form-control" id = "mdp" name="mdp" required="required"/> <br/>
 
-            <div class = "form-group">
-            <label class = "control-label" for = "confirmer_mdp"> confirmer votre mot de passe : </label>
-            <input type = "text" class = "form-control" id = "confirmer_mdp" name="confirmer_mdp" required="required"/>
-
-            <input type="submit" class="btn btn-primary" value="Inscription" name="register"/>
+            <input type="submit" class="btn btn-primary" value="Connexion" name="login"/>
       </div>
 
     </div><!-- /.container -->

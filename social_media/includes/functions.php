@@ -11,4 +11,10 @@ if(!function_exists("is_already_in_use")){
 	}
 }
 
+
+function connectMaBase(){
+    $base = mysqli_connect ('localhost', 'root', '');  
+    mysqli_select_db ($base,"socialmedia") ;
+}
+
 ?>
