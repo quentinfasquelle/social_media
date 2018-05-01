@@ -1,22 +1,167 @@
-drop table if exists Compte;
 
+drop table if exists Emploi,Album,Video,Photo,Commentaire,Publication,Notification,Evenement,Message,Reseau,Compte;
 
 CREATE TABLE Compte (
 	CompteID INT NOT NULL AUTO_INCREMENT,
+	Pseudo VARCHAR(255) NOT NULL,
 	Nom VARCHAR(255) NOT NULL,
 	Prenom VARCHAR(255) NOT NULL,
 	Email VARCHAR(255) NOT NULL,
 	DateNaissance DATE,
-	Promotion DECIMAL(4),
+	Promotion VARCHAR(255),
 	SituationPro VARCHAR(255),
 	Mdp VARCHAR(255) NOT NULL,
 	TypeCompte enum('Admin','auteur') default 'auteur',
-	PRIMARY KEY(CompteID)
+	PRIMARY KEY (CompteID)
 );
 
-INSERT INTO Compte (Nom,Prenom,Email,DateNaissance,Promotion,SituationPro,Mdp,TypeCompte) VALUES
-	('Phonesavanh','Remy','remy.phonesavanh@edu.ece.fr','1997-02-16',2020,'Etudiant','RemyP','Admin'),
-	('Fasquelle','Quentin','quentin.fasquelle@edu.ece.fr','1998-04-08',2021,'Etudiant','QuentinF','Admin'),
-	('Jan','Brieuc','brieuc.jan@edu.ece.fr','1997-03-26',2020,'Etudiant','BrieucJ','Admin'),
-	('Guillermou','Tom','tom.guillermou@edu.ece.fr','1997-02-19',2020,'Etudiant','TomG','auteur'),
-	('Poletto','Matthieu','matthieu.poletto@edu.ece.fr','1996-09-07',2019,'Etudiant','MatthieuP','auteur');
+INSERT INTO Compte (Pseudo,Nom,Prenom,Email,DateNaissance,Promotion,SituationPro,Mdp,TypeCompte) VALUES
+	('RemyF','Phonesavanh','Remy','remy.phonesavanh@edu.ece.fr','1997-02-16','2020','Etudiant','RemyP','Admin'),
+	('QuentinF','Fasquelle','Quentin','quentin.fasquelle@edu.ece.fr','1998-04-08','2021','Etudiant','QuentinF','Admin'),
+	('BrieucJ','Jan','Brieuc','brieuc.jan@edu.ece.fr','1997-03-26','2020','Etudiant','BrieucJ','Admin'),
+	('TomG','Guillermou','Tom','tom.guillermou@edu.ece.fr','1997-02-19','2020','Etudiant','TomG','auteur'),
+	('MatthieuP','Poletto','Matthieu','matthieu.poletto@edu.ece.fr','1996-09-07','2019','Etudiant','MatthieuP','auteur');
+
+CREATE TABLE Reseau (
+	CompteID INT NOT NULL,
+	ReseauID INT NOT NULL,
+	PRIMARY KEY (CompteID,ReseauID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (ReseauID) REFERENCES Compte (CompteID)
+	);
+
+INSERT INTO Reseau (CompteID,ReseauID) VALUES
+	(1,2),
+	(1,3),
+	(1,4),
+	(1,5),
+	(2,1),
+	(3,1),
+	(4,1),
+	(5,1);
+
+CREATE TABLE Message (
+	MessageID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	ReseauID INT NOT NULL,
+	Contenu TEXT,
+	PRIMARY KEY (MessageID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID),
+	FOREIGN KEY (ReseauID) REFERENCES Reseau (ReseauID) 
+);
+
+INSERT INTO Message (CompteID,ReseauID,Contenu) VALUES
+	(1,2,'Bonjour'),
+	(2,1,'Salut'),
+	(1,2,'Ca va?'),
+	(2,1,'Ouai');
+
+CREATE TABLE Evenement (
+	EvenementID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	DateHeure DATETIME,
+	Lieu VARCHAR(255),
+	Contenu TEXT,
+	PRIMARY KEY (EvenementID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Evenement (CompteID,DateHeure,Lieu,Contenu) VALUES
+	(1,'2018-05-28 10:00:00','Cergy-pontoise','Course de kart inter-membre');
+
+CREATE TABLE Notification (
+	NotificationID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	EvenementID INT,
+	NotificationTexte TEXT,
+	PRIMARY KEY (NotificationID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID),
+	FOREIGN KEY (EvenementID) REFERENCES Evenement (EvenementID) 
+);
+
+INSERT INTO Notification (CompteID,EvenementID,NotificationTexte) VALUES
+	(1,1,'Remy Phonesavanh a publié l événement "Course de kart inter-membre"');
+
+
+CREATE TABLE Photo (
+	PhotoID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	AdressePhoto VARCHAR(255) NOT NULL,
+	PRIMARY KEY (PhotoID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Photo (CompteID,AdressePhoto) VALUES
+	(1,'image.jpeg');
+
+CREATE TABLE Video (
+	VideoID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	AdresseVideo VARCHAR(255) NOT NULL,
+	PRIMARY KEY (VideoID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Video (CompteID,AdresseVideo) VALUES
+	(1,'video.mp4');
+
+CREATE TABLE Album (
+	AlbumID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	PhotoID INT NOT NULL,
+	VideoID INT NOT NULL,
+	DateAlbum DATETIME,
+	PRIMARY KEY (AlbumID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ,
+	FOREIGN KEY (PhotoID) REFERENCES Photo (PhotoID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (VideoID) REFERENCES Video (VideoID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Album (CompteID, PhotoID,VideoID,DateAlbum) VALUES
+	(1,1,1,"2018-04-30 10:00:00");
+
+CREATE TABLE Emploi (
+	EmploiID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	Description TEXT,
+	PRIMARY KEY (EmploiID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+
+INSERT INTO Emploi (CompteID,Description) VALUES
+	(1,'Offre de stage BAC+3');
+
+CREATE TABLE Commentaire (
+	CommentaireID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	PublicationID INT NOT NULL,
+	Contenu TEXT,
+	PRIMARY KEY (CommentaireID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Commentaire (CompteID,Contenu) VALUES
+	(1,"T'es beau");
+
+
+CREATE TABLE Publication (
+	PublicationID INT NOT NULL AUTO_INCREMENT,
+	CompteID INT NOT NULL,
+	PhotoID INT,
+	VideoID INT,
+	CommentaireID INT,
+	ChampTexte TEXT,
+	Aime INT,
+	PRIMARY KEY (PublicationID),
+	FOREIGN KEY (CompteID) REFERENCES Compte (CompteID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (PhotoID) REFERENCES Photo (PhotoID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (VideoID) REFERENCES Video (VideoID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (CommentaireID) REFERENCES Commentaire (CommentaireID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Publication (CompteID,PhotoID,VideoID,CommentaireID) VALUES
+	(1,1,1,1);
+
+
+
+
