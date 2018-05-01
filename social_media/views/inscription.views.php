@@ -46,9 +46,26 @@
       </div>
     </nav>
 
-    <div class="container">
+    <div id ="main-content">
       <div class="jumbotron"> 
         <h1>L'inscription c'est par ici !</h1>
+
+        <?php
+        if(isset($errors) && count($errors) != 0){
+
+        echo '<div class = "bg-danger">';
+          foreach($errors as $error){
+          echo $error.'<br/>';
+        }
+      echo'</div>';
+      } else{
+      echo '<div class = "bg-danger">';
+          echo 'compte enregistré avec succès';
+      echo'</div>';
+
+    }
+
+        ?>
         <form method="post">
 
           <div class = "form-group">
@@ -56,8 +73,8 @@
             <input type = "text" class = "form-control" id = "pseudo" name="pseudo" required="required"/>
 
           <div class = "form-group">
-            <label class = "control-label" for = "name"> Nom: </label>
-            <input type = "text" class = "form-control" id = "name" name="name" required="required"/>
+            <label class = "control-label" for = "nom"> Nom: </label>
+            <input type = "text" class = "form-control" id = "nom" name="nom" required="required"/>
 
             <div class = "form-group">
             <label class = "control-label" for = "prenom"> Prenom: </label>
@@ -80,12 +97,7 @@
             <label class = "control-label" for = "situationpro"> situation professionelle: </label>
             <input type = "text" class = "form-control" id = "situationpro" name="situationpro" required="required"/>  
 
-            <div class = "form-group">
-            <label class = "control-label" for = "sexe"> sexe : </label>
-            <input type = "radio" name = "femme" value = "oui" id="oui" />
-             <label for="oui">femme</label>
-             <input type = "radio" name = "homme" value = "non" id="non" />
-             <label for="oui">homme</label>
+            
 
             <div class = "form-group">
             <label class = "control-label" for = "mdp"> mot de passe : </label>

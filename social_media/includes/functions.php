@@ -1,6 +1,6 @@
 <?php
 
-if(!function_exist("is_already_in_use")){
+if(!function_exists("is_already_in_use")){
 	function is_already_in_use($field, $value, $table){
 		global $db;
 		$q = $db -> prepare("SELECT id FROM $table WHERE $field = ?");
@@ -10,3 +10,5 @@ if(!function_exist("is_already_in_use")){
 		return $count;
 	}
 }
+
+?>
