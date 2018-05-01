@@ -1,8 +1,8 @@
 <?php
 
-
+require("D:/wamp64/www/social_media/views/inscription.views.php");
 require("D:/wamp64/www/social_media/config/database.php");
-require("D:/wamp64/www/social_media/includes/function.php")
+require("D:/wamp64/www/social_media/includes/functions.php");
 
 	if(isset($_POST["register"])){
 
@@ -12,7 +12,7 @@ require("D:/wamp64/www/social_media/includes/function.php")
 
 			extract($_POST);
 
-if(mb_strlen($pseudo)<2{
+if(mb_strlen($pseudo)<2){
 	$errors[]= "Pseudo trop court! ( minimum 2 caractères)";
 }
 
@@ -42,7 +42,7 @@ if(is_already_in_use('pdeuso', $pseudo, 'users')){
 
 		} else {
 
-			$errors[] = "Veuillez SVP remplir tous les champs !"
+			$errors[] = "Veuillez SVP remplir tous les champs !";
 
 		}
 
@@ -56,4 +56,3 @@ if(is_already_in_use('pdeuso', $pseudo, 'users')){
 
 
 
-require("D:/wamp64/www/social_media/views/inscription.views.php");
