@@ -71,17 +71,60 @@
 
               </form>
 
-            </div> 
+           
+            <div class="jumbotron"> 
+              <h2>Publications :</h2>
+              <p> <?php while ($pd = mysqli_fetch_array($_SESSION['rep'])){
+
+                while ($data = mysqli_fetch_array($_SESSION['reponse'])) { 
+
+              if($data['compteID'] == $_SESSION['compteID']){
+              echo 'publication n° : '.$data['publicationID'].'<br />';
+              echo 'pseudo : '.$_SESSION['pseudo'].'<br />';
+              echo 'contenu : '.$data['champtexte'].'<br /><br />';
+            }
+            
+
+              if($data['compteID'] == $pd['compteID']){
+              echo 'publication n° : '.$data['publicationID'].'<br />';
+              echo 'pseudo : '.$pd['pseudo'].'<br />';
+              echo 'contenu : '.$data['champtexte'].'<br /><br /><br /><br />';
+            }
+              
+            }
+          }
+            
+          
+                ?></p>
+              </div>
+            </div>
             <div class="col-md-6">
-              <h4> <?php while ($data = mysqli_fetch_array($_SESSION['reponse'])) {
-  
-              echo 'Nom : '.$data['compteID'].'<br />';
-              echo 'Son tél : '.$data['champtexte'].'<br /><br />';
-              }
-                ?></h4>
+              <form  method ="post">
+              <div class = "form-group">
+                <label class ="control-label" for ="publicationID">quel numéro de publication voulez vous commentez ?</label>
+                <input type = "text" class = "form-control" id = "publicationID" name="publicationID" required="publicationID"/>
+                <label class="control-label" for= "contenu">Commentaire:</label>
+                <input type = "text" class = "form-control" id = "contenu" name="contenu"/>
+                <label class="control-label" for="aime">Mention j'aime :</label>
+                <input type="checkbox" name="aime" value="aime" class="btn btn-default btn-xs">
+                <input type="submit" class="btn btn-primary" name="submit" value="submit"/>
+              </div>
+
+              </form>
+              <?php  while ($d = mysqli_fetch_array($_SESSION['r'])) {
+
+                     
+
+                if( $d['compteID'] == $_SESSION['compteID']){
+                echo 'commentaire de la publication n° :'.$d['publicationID'].'<br/>';
+                echo 'pseudo :'.$_SESSION['pseudo'].'<br/>';
+                echo 'commentaire :'.$d['contenu'].'<br/>';
+              } 
+          }?>
             </div>
 
-            
+</div>
+
 
 
 

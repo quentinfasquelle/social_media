@@ -31,7 +31,8 @@ if(isset($_POST["login"])){
 			$_SESSION['pseudo'] = $user["pseudo"];		
 			
 		
-		echo "<script type='text/javascript'>document.location.replace('profil.php');</script>";
+		header('Location: profil.php?id='.$user["compteID"]);
+		die();
 		} else {
 			echo("combinaison incorrect");
 			//save_input_data();

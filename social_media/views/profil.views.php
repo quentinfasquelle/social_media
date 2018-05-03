@@ -57,14 +57,17 @@
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"> Information de <?= $_SESSION['pseudo']?> </h3>
+            <h2 class="panel-title"> Information de <?= $_SESSION['pseudo']?> </h2>
           </div>
           <div class="panel-body">
-          Image <br/>
-          Nom </br>
-          Prenom </br>
-          pseudo <br/>
-          Mail <br/>
+          <p><?php while ($data = mysqli_fetch_array($_SESSION['reponse'])){
+
+            echo 'Nom :'.$data['Nom'].'<br/>';
+            echo 'Prenom :'.$data['Prenom'].'<br/>';
+            echo 'Date de naissance :'.$data['DateNaissance'].'<br/>';
+            echo 'Email :'.$data['Email'].'<br/>';
+
+          } ?></p>
           </div>
         </div>
       </div>
@@ -75,9 +78,15 @@
             <h3 class="panel-title"> Informations professionnelles de <?= $_SESSION['pseudo']?> </h3>
           </div>
           <div class="panel-body">
-          Promotion ( si étudiant ) <br/>
-          Situation Professionnelle <br/>
-          Linkedin <br/>
+          <p><?php while ($d = mysqli_fetch_array($_SESSION['rep'])){
+
+            echo 'Promotion :'.$d['Promotion'].'<br/>';
+            echo 'Situation Professionnelle :'.$d['SituationPro'].'<br/>';
+            
+
+          } ?>
+        Linkedin <br/>
+          </p>
           </div>
         </div>
       </div>
@@ -97,5 +106,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" ></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src ="D:/wamp64/www/social_media/libraries/parsley/parsley.min.js"></script>
+    <script src ="D:/wamp64/www/social_media/libraries/parsley/fr.js"></script>
   </body>
 </html>
