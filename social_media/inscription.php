@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 require("D:/wamp64/www/social_media/config/database.php");
 require("D:/wamp64/www/social_media/includes/functions.php");
 

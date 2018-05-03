@@ -38,22 +38,23 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Accueil</a></li>
-            
-
-            <li> <a href="connexion.php">connexion</a></li>
-            <li> <a href="inscription.php">inscription</a></li>
-          
+            <li class="active"><a href="flux.php">flux</a></li>
+            <li><a href="profil.php">Profile</a></li>
+            <li ><a href="monreseau.php">Mon réseau</a></li>
+      <li><a href="notifications.php">Notifications</a></li>
+      <li class="active"><a href="emplois.php">Emplois</a></li>
+      <li><a href="index.php">Deconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
+
     <div class="container">
 
       <div class="jumbotron"> 
-        <h1>Bienvenue sur le reseau social de l'ECE !</h1>
-        <p class="lead">Viens on est bien ✌</p>
+        <h1>Bienvenue dans vos emplois !</h1>
+        
       </div>
 
     </div><!-- /.container -->

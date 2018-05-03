@@ -38,9 +38,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Accueil</a></li>
+            <li ><a href="index.php">Accueil</a></li>
             <li><a href="connexion.php">connexion</a></li>
-            <li><a href="inscription.php">inscription</a></li>
+            <li class="active"><a href="inscription.php">inscription</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

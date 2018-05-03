@@ -1,7 +1,7 @@
 <?php
 
-if(!isset($_SESSION['user_id']) || !isset($_SESSION['pseudo'])){
-	echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
+//if(!isset($_SESSION['compteID']) || !isset($_SESSION['pseudo'])){
+//	echo "<script type='text/javascript'>document.location.replace('connexion.php');</script>";
 
 
-}
+//}

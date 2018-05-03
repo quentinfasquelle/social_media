@@ -38,9 +38,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Accueil</a></li>
-            <li class="active"><a href="connexion.php">Connexion</a></li>
-            <li><a href="inscription.php">Inscription</a></li>
+            <li><a href="flux.php">flux</a></li>
+            <li class="active"><a href="profil.php">Profile</a></li>
+            <li><a href="monreseau.php">Mon réseau</a></li>
+      <li><a href="notifications.php">Notifications</a></li>
+      <li><a href="emplois.php">Emplois</a></li>
+      <li><a href="index.php">Deconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -48,10 +51,40 @@
 
     <div id ="main-content">
       <div class="jumbotron"> 
-        <h1>Page de Profil</h1>
+        <h2>Bienvenue <?= $_SESSION['pseudo']?> !</h2>
 
-       
+        <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"> Information de <?= $_SESSION['pseudo']?> </h3>
+          </div>
+          <div class="panel-body">
+          Image <br/>
+          Nom </br>
+          Prenom </br>
+          pseudo <br/>
+          Mail <br/>
+          </div>
+        </div>
       </div>
+      
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"> Informations professionnelles de <?= $_SESSION['pseudo']?> </h3>
+          </div>
+          <div class="panel-body">
+          Promotion ( si étudiant ) <br/>
+          Situation Professionnelle <br/>
+          Linkedin <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+          
+
+          
 
     </div><!-- /.container -->
 

@@ -1,0 +1,19 @@
+.status-post-submit{
+	border:none;
+	padding: 0.5em 1em;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.status-post-submit .btn{
+	float:right;
+}
+
+.status-post{
+	border: 2px solid #e3e3e3;
+	background-color: #fff;
+}
+
+.status-post textarea{
+	border: none;
+}
