@@ -38,12 +38,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Accueil</a></li>
-            <li class="active"><a href="connexion.php">Profile</a></li>
-            <li><a href="inscription.php">Mon réseau</a></li>
-      <li><a href="inscription.php">Notifications</a></li>
-      <li><a href="inscription.php">Emplois</a></li>
-      <li><a href="inscription.php">Deconnexion</a></li>
+            <li><a href="flux.php">flux</a></li>
+            <li class="active"><a href="profil.php">Profile</a></li>
+            <li><a href="monreseau.php">Mon réseau</a></li>
+      <li><a href="notifications.php">Notifications</a></li>
+      <li><a href="emplois.php">Emplois</a></li>
+      <li><a href="index.php">Deconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -51,28 +51,26 @@
 
     <div id ="main-content">
       <div class="jumbotron"> 
-        <h2>Bienvenue <?php echo $_SESSION['pseudo']?> !</h2>
+        <h2>Bienvenue <?= $_SESSION['pseudo']?> !</h2>
 
         <div class="row">
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"> Information de <?= $_SESSION['pseudo']?> </h3>
+            <h2 class="panel-title"> Information de <?= $_SESSION['pseudo']?> </h2>
           </div>
           <div class="panel-body">
-          <!--/ IMAGE -->
-		  <div class="col-md-5">
-			<img src="views/m3drift.jpg" width="100" height="60" title="Photo de profil">
-		  </div>
-		  <div class="row">
-			<div class="col-md-7">
-				<strong> <?= $_SESSION['prenom'] ?></strong></br>
-			</div>
-		  </div>
-          Nom </br>
-          
-          pseudo <br/>
-          Mail <br/>
+          <p><?php while ($data = mysqli_fetch_array($_SESSION['reponse'])){
+            echo '<a href="'.$data['PhotoProfil'].'"><img class ="photo" src="'.$data['PhotoProfil'].'"/></a><br/>';
+            echo 'Nom : '.$data['Nom'].'<br/>';
+            echo 'Prenom : '.$data['Prenom'].'<br/>';
+            echo 'Date de naissance : '.$data['DateNaissance'].'<br/>';
+            echo 'Email : '.$data['Email'].'<br/>'.'<br/>';
+            echo 'Pseudo : '.$data['Pseudo'].'<br/>';
+            echo 'Mot de passe : '.$data['Mdp'].'<br/>';
+
+
+          } ?></p>
           </div>
         </div>
       </div>
@@ -83,10 +81,74 @@
             <h3 class="panel-title"> Informations professionnelles de <?= $_SESSION['pseudo']?> </h3>
           </div>
           <div class="panel-body">
-          Promotion ( si étudiant ) <br/>
-          Situation Professionnelle <br/>
-          Linkedin <br/>
+          <p><?php while ($d = mysqli_fetch_array($_SESSION['rep'])){
+
+            echo 'Promotion :'.$d['Promotion'].'<br/>';
+            echo 'Situation Professionnelle :'.$d['SituationPro'].'<br/>';
+
+          } ?>
+        Linkedin <br/>
+          </p>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title"> Modification de vos informations </h2>
+          </div>
+          <div class="panel-body">
+            <form method="post">
+
+              
+              <div class = "form-group">
+                <label class = "control-label" for = "photoprofil"> Photo de profil : </label>
+                <input type = "text" class = "form-control" id = "photoprofil" name="photoprofil" />
+
+              <div class = "form-group">
+                <label class = "control-label" for = "nom"> Nom: </label>
+                <input type = "text" class = "form-control" id = "nom" name="nom" />
+
+              <div class = "form-group">
+                <label class = "control-label" for = "prenom"> Prenom: </label>
+                <input type = "text" class = "form-control" id = "prenom" name="prenom" /> 
+
+              <div class = "form-group">
+                <label class = "control-label" for = "email"> Adresse Email: </label>
+                <input type = "email" class = "form-control" id = "email" name="email" /> 
+
+              <div class = "form-group">
+                <label class = "control-label" for = "promotion"> promotion : </label>
+                <input type = "text" class = "form-control" id = "promotion" name="promotion" />
+
+
+              <div class = "form-group">
+                <label class = "control-label" for = "situationpro"> situation professionelle: </label>
+                <input type = "text" class = "form-control" id = "situationpro" name="situationpro" />  
+
+             
+
+              <div class = "form-group">
+                <label class = "control-label" for = "mdp"> mot de passe : </label>
+                <input type = "text" class = "form-control" id = "mdp" name="mdp"/> 
+
+              <div class = "form-group">
+                <label class = "control-label" for = "confirmer_mdp"> confirmer votre mot de passe : </label>
+                <input type = "text" class = "form-control" id = "confirmer_mdp" name="confirmer_mdp"/>
+
+              <div class = "form-group">
+                <label class = "control-label" >  </label>
+
+              <div class = "form-group">
+                <label class = "control-label" for = "mdp_actuel"> Mot de passe actuel : </label>
+                <input type = "text" class = "form-control" id = "mdp_actuel" name="mdr_actual" required="required"/>
+
+                <input type="submit" class="btn btn-primary" value="Modifier" name="Modifier"/>
+          
+          </div>
+
         </div>
       </div>
           
@@ -104,5 +166,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" ></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src ="/Applications/MAMP/htdocs/social_media/libraries/parsley/parsley.min.js"></script>
+    <script src ="/Applications/MAMP/htdocs/social_media/libraries/parsley/fr.js"></script>
   </body>
 </html>
